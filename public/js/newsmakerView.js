@@ -10,14 +10,16 @@ NewsManagerView.prototype = {
     for (var i = 0; i < storyList.length; i++) {
       var headline = storyList[i].webTitle;
       var thumbnail = storyList[i].fields.thumbnail;
-      var list = "<li id='" + i + "'><img src='" + thumbnail + "'><br><a class='link' href='#" + i + "'>" + headline + "</a></li><br>";
+      var list = "<li><img src='" + thumbnail + "'><br><a id='" + i + "' class='link' href='#" + i + "'>" + headline + "</a></li><br>";
       document.getElementById("headlines").innerHTML += list;
     }
   },
 
-  displaySummary: function(text) {
-     var summary = "<p>" + text + "</p>";
-     document.getElementById("storySummary").innerHTML = summary;
+  displaySummary: function(title, newsSummary) {
+     var headline = "<h1>" + title + "</h1>"
+     var summary = "<p>" + newsSummary + "</p>";
+     document.getElementById("storySummary").innerHTML += headline;
+     document.getElementById("storySummary").innerHTML += summary;
    },
 
    invisible: function(id) {

@@ -15,16 +15,17 @@ NewsManagerController.prototype = {
     this.NewsManagerView.createLink(this.NewsManagerModel.storyList);
   },
 
-  showSummary: function(id){
+  showSummary: function(title, newsSummary){
     this.NewsManagerView.invisible('headlines');
-    summary = "Hello"
-    this.NewsManagerView.displaySummary('hello');
+    this.NewsManagerView.displaySummary(title, newsSummary);
   },
 
   setupHeadlines: function() {
     var self = this;
     this.headlines.addEventListener('click', function(){
-      self.showSummary(event.target.id);
+      link = self.NewsManagerModel.getUrl(event.target.id);
+      title =self.NewsManagerModel.getTitle(event.target.id);
+      self.summaryApiRequest(link, title);
     });
   },
 
@@ -36,6 +37,18 @@ NewsManagerController.prototype = {
       if (this.readyState === 4 && this.status === 200) {
         var newsObject = JSON.parse(this.responseText);
         self.createStory(newsObject.response.results);
+      }
+    }
+  },
+
+  summaryApiRequest: function(link, title) {
+    this.xhr.open('GET', "http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=" + link, true);
+    this.xhr.send();
+    self = this;
+    this.xhr.onreadystatechange = function(){
+      if (this.readyState === 4 && this.status === 200) {
+        var newsSummary = JSON.parse(this.responseText);
+        self.showSummary(title, newsSummary);
       }
     }
   }

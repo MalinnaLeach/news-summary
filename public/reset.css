@@ -23,7 +23,6 @@ time, mark, audio, video {
 	font: inherit;
 	text-decoration: none;
 	vertical-align: baseline;
-	color: black;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -47,4 +46,8 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+
+img {
+	border: 5px solid black;
 }
