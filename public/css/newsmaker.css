@@ -60,7 +60,8 @@ body {
    border: 3px solid black;
    border-radius: 10px;
    font-size: 25px;
-   padding: 2%;
+   padding: 1%;
+   margin-top: 3000px;
  }
 
 @media only screen and (max-device-width: 480px) {

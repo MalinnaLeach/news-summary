@@ -1,59 +1,36 @@
 (function(exports){
 
-function NewsManagerController (storySummary, headlines, NewsManagerModel, NewsManagerView) {
+function NewsManagerController (storySummary, headlines, NewsManagerModel, NewsManagerView, ApiManager) {
   this.storySummary = storySummary;
   this.headlines = headlines;
-  this.newsManagerModel = NewsManagerModel;
-  this.newsManagerView = NewsManagerView;
-  this.xhr = new XMLHttpRequest();
-  this.setupHeadlines();
+  this.model = NewsManagerModel;
+  this.view = NewsManagerView;
+  this.api = ApiManager;
 }
 
 NewsManagerController.prototype = {
-  createStory: function(JSON) {
-    this.newsManagerModel.saveNews(JSON);
-    this.newsManagerView.createLink(this.newsManagerModel.storyList);
+
+  createStories: function(JSON, self) {
+    self.model.saveNews(JSON);
+    self.view.createLinks(self.model.storyList);
+    self.setupHeadlines();
   },
 
-  showSummary: function(id, newsSummary){
-    this.newsManagerView.invisible('headlines');
-    var title = this.newsManagerModel.getTitle(id);
-    var fullStoryLink = this.newsManagerModel.getUrl(id);
-    var thumbnail = this.newsManagerModel.getThumbnail(id);
-    this.newsManagerView.displaySummary(thumbnail, title, newsSummary, fullStoryLink, this.storySummary);
+  showSummary: function(id, newsSummary, self){
+    self.view.invisible('headlines');
+    var title = self.model.getTitle(id);
+    var fullStoryLink = self.model.getUrl(id);
+    var thumbnail = self.model.getThumbnail(id);
+    self.view.displaySummary(thumbnail, title, newsSummary, fullStoryLink, self.storySummary);
   },
 
   setupHeadlines: function() {
     var self = this;
     this.headlines.addEventListener('click', function(){
-      link = self.newsManagerModel.getUrl(event.target.id);
-      id = event.target.id;
-      self.summaryApiRequest(link, id);
+      var link = self.model.getUrl(event.target.id);
+      var id = event.target.id;
+      self.api.summaryApiRequest(link, id, self, self.showSummary);
     });
-  },
-
-  apiRequest: function(){
-    this.xhr.open('GET', "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/search?show-fields=thumbnail", true);
-    this.xhr.send();
-    self = this;
-    this.xhr.onreadystatechange = function(){
-      if (this.readyState === 4 && this.status === 200) {
-        var newsObject = JSON.parse(this.responseText);
-        self.createStory(newsObject.response.results);
-      }
-    }
-  },
-
-  summaryApiRequest: function(link, id) {
-    this.xhr.open('GET', "http://news-summary-api.herokuapp.com/aylien?apiRequestUrl=https://api.aylien.com/api/v1/summarize?url=" + link, true);
-    this.xhr.send();
-    self = this;
-    this.xhr.onreadystatechange = function(){
-      if (this.readyState === 4 && this.status === 200) {
-        var newsSummary = JSON.parse(this.responseText);
-        self.showSummary(id, newsSummary.sentences);
-      }
-    }
   }
 }
 

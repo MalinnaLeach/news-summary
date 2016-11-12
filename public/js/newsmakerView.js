@@ -6,7 +6,7 @@ function NewsManagerView () {
 
 NewsManagerView.prototype = {
 
-  createLink: function(storyList) {
+  createLinks: function(storyList) {
     for (var i = 0; i < storyList.length; i++) {
       var headline = storyList[i].webTitle;
       var thumbnail = storyList[i].fields.thumbnail;
@@ -24,7 +24,7 @@ NewsManagerView.prototype = {
        var summary = "<p>" + newsSummary[i] + "</p><br>";
        htmlObject.innerHTML += summary;
      }
-     var link = "<a href='" + fullStoryLink + "'>Read Full Story Here</a>";
+     var link = "<br><a href='" + fullStoryLink + "'>Read Full Story Here</a>";
      htmlObject.innerHTML += link;
    },
 

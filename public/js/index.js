@@ -5,7 +5,8 @@
     var controller = new NewsManagerController(storySummary,
                               headlines,
                               new NewsManagerModel(),
-                              new NewsManagerView());
-    controller.apiRequest();
+                              new NewsManagerView(),
+                              new ApiManager());
+    controller.api.apiRequest(controller, controller.createStories);
   });
 })();

@@ -5,7 +5,8 @@
     var controller = new NewsManagerController(storySummary,
                               headlines,
                               new NewsManagerModel(),
-                              new NewsManagerView());
+                              new NewsManagerView(),
+                              new ApiManager());
     testSuite(controller);
     });
 })();
