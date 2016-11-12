@@ -21,9 +21,8 @@ var testSuite = function (controller) {
     })();
 
     (function showSummary() {
-      controller.showSummary(dummyTitle, dummySummary);
-      expect.elementIdToContainInnerText("Robert Redford", "storySummary");
-      removeLinks();
+      controller.showSummary(2, dummySummary);
+      expect.elementIdToContainInnerText("Robert Redford at Sundance", "storySummary");
     })();
 
     function removeLinks() {

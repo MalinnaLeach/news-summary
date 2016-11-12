@@ -15,11 +15,17 @@ NewsManagerView.prototype = {
     }
   },
 
-  displaySummary: function(title, newsSummary) {
+  displaySummary: function(thumbnail, title, newsSummary, fullStoryLink, htmlObject) {
+     var image = "<img src='" + thumbnail + "'><br>"
+     htmlObject.innerHTML += image;
      var headline = "<h1>" + title + "</h1>"
-     var summary = "<p>" + newsSummary + "</p>";
-     document.getElementById("storySummary").innerHTML += headline;
-     document.getElementById("storySummary").innerHTML += summary;
+     htmlObject.innerHTML += headline;
+     for (var i=0; i<newsSummary.length; i++) {
+       var summary = "<p>" + newsSummary[i] + "</p><br>";
+       htmlObject.innerHTML += summary;
+     }
+     var link = "<a href='" + fullStoryLink + "'>Read Full Story Here</a>";
+     htmlObject.innerHTML += link;
    },
 
    invisible: function(id) {

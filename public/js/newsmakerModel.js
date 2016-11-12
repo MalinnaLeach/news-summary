@@ -14,6 +14,10 @@ NewsManagerModel.prototype = {
 
   getUrl: function (index) {
     return this.storyList[index].webUrl;
+  },
+
+  getThumbnail: function (index) {
+    return this.storyList[index].fields.thumbnail;
   }
 
 };

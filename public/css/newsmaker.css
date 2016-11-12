@@ -1,9 +1,9 @@
 body {
   text-align: center;
   font-family: sans-serif;
-  font-weight: bold;
   font-size: 25px;
   color: white;
+  background-color: #d9d9d9;
 };
 
  .header {
@@ -24,6 +24,7 @@ body {
    background-color: #990000;
    color: white;
    padding: 3%;
+   border: 5px solid black;
  }
 
  li img {
@@ -38,9 +39,42 @@ body {
  #storySummary p {
    color: black;
    font-size: 20px;
+   width: 80%;
+   margin: 0 auto;
+   text-align: left;
  }
 
  #storySummary h1 {
    color: black;
-   font-size: 30px;
+   font-size: 40px;
+   font-weight: bold;
+   width: 80%;
+   margin: 0 auto;
+   margin-top: 2%;
+   margin-bottom: 2%;
  }
+
+ #storySummary a {
+   color: white;
+   background-color: #0066cc;
+   border: 3px solid black;
+   border-radius: 10px;
+   font-size: 25px;
+   padding: 2%;
+ }
+
+@media only screen and (max-device-width: 480px) {
+
+   body {
+     font-size: 35px;
+   }
+
+    #storySummary p {
+      font-size: 30px;
+    }
+
+    #storySummary h1 {
+      font-size: 50px;
+    }
+
+}
