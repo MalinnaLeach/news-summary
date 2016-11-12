@@ -17,7 +17,7 @@ $ cd news-summary
 $ open newsmaker.html
 ```
 
-Navigate to localhost:4567 in your browser to see the homescreen pictured below, and the rest should be self explanatory.
+You should then see a similar homescreen to that pictured below, click on a headline to read more.
 
 To run the test suite:
 ```
