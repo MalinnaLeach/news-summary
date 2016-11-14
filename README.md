@@ -14,17 +14,17 @@ Download and run the app:
 ```
 $ git clone git@github.com:malinnaleach/news-summary.git
 $ cd news-summary
-$ open newsmaker.html
+$ open newsManager.html
 ```
 
 You should then see a similar homescreen to that pictured below, click on a headline to read more.
 
 To run the test suite:
 ```
-Open newsmaker.html in you code editor of choice
+Open newsManager.html in you code editor of choice
 Comment out line 20
 Un-comment lines 21 - 24
-Run newsmaker.html in your browser
+Run newsManager.html in your browser
 Look out for test updates in your console
 ```
 
