@@ -7,6 +7,8 @@
                               new NewsManagerModel(),
                               new NewsManagerView(),
                               new ApiManager());
-    controller.api.apiRequest(controller, controller.createStories);
+    controller.api.apiRequest(function(headlines) {
+      controller.createStories(headlines);
+    });
   });
 })();

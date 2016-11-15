@@ -10,18 +10,18 @@ function NewsManagerController (storySummary, headlines, NewsManagerModel, NewsM
 
 NewsManagerController.prototype = {
 
-  createStories: function(JSON, self) {
-    self.model.saveNews(JSON);
-    self.view.createLinks(self.model.storyList);
-    self.setupHeadlines();
+  createStories: function(JSON) {
+    this.model.saveNews(JSON);
+    this.view.createLinks(this.model.storyList);
+    this.setupHeadlines();
   },
 
-  showSummary: function(id, newsSummary, self){
-    self.view.invisible('headlines');
-    var title = self.model.getTitle(id);
-    var fullStoryLink = self.model.getUrl(id);
-    var thumbnail = self.model.getThumbnail(id);
-    self.view.displaySummary(thumbnail, title, newsSummary, fullStoryLink, self.storySummary);
+  showSummary: function(id, summary){
+    this.view.invisible('headlines');
+    var title = this.model.getTitle(id);
+    var fullStoryLink = this.model.getUrl(id);
+    var thumbnail = this.model.getThumbnail(id);
+    this.view.displaySummary(thumbnail, title, summary, fullStoryLink, this.storySummary);
   },
 
   setupHeadlines: function() {
@@ -29,7 +29,9 @@ NewsManagerController.prototype = {
     this.headlines.addEventListener('click', function(){
       var link = self.model.getUrl(event.target.id);
       var id = event.target.id;
-      self.api.summaryApiRequest(link, id, self, self.showSummary);
+      self.api.summaryApiRequest(link, function(summary) {
+        self.showSummary(id, summary);
+      });
     });
   }
 }
